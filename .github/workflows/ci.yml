@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: crashrewind
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Verify TypeScript version
+        run: pnpm exec tsc -v
+
+      - name: Type check
+        run: pnpm -w exec tsc --noEmit
+
+      - name: Database migration (PostgreSQL)
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/crashrewind
+        run: |
+          pnpm exec prisma migrate deploy --schema prisma/schema.prisma
+          pnpm exec prisma generate --schema prisma/schema.prisma
+
+      - name: Build API
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/crashrewind
+        run: pnpm --filter services/api build
+
+      - name: Build Dashboard
+        run: pnpm --filter apps/dashboard build
+
+      - name: Build Worker
+        run: pnpm --filter workers/replay-runner build
+
+      - name: Build Shared
+        run: pnpm --filter packages/shared build
+
+      - name: Lint check
+        run: pnpm --filter apps/dashboard lint || true
+
+  test-sqlite:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Database migration (SQLite)
+        env:
+          DATABASE_URL: "file:./test.db"
+        run: |
+          pnpm exec prisma migrate deploy --schema prisma/schema.prisma
+          pnpm exec prisma generate --schema prisma/schema.prisma
+
+      - name: Seed database
+        env:
+          DATABASE_URL: "file:./test.db"
+        run: pnpm seed
+
+      - name: Test API endpoints
+        env:
+          DATABASE_URL: "file:./test.db"
+        run: |
+          # Start API in background
+          pnpm --filter services/api start &
+          API_PID=$!
+          
+          # Wait for API to start
+          sleep 10
+          
+          # Test basic endpoints
+          curl -f http://localhost:4000/clusters || exit 1
+          
+          # Cleanup
+          kill $API_PID

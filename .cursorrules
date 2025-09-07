@@ -1,0 +1,14 @@
+# Cursor: Build CrashRewind MVP
+
+- Use Node 20.x and pnpm.
+- Ensure workspace TypeScript is used: **DO NOT** change versions.
+  - Root has devDependency `typescript@5.6.3` and `overrides` forcing all packages to that version.
+  - .vscode/settings.json points `typescript.tsdk` to the workspace.
+  - After install, run `pnpm exec tsc -v` and expect `5.6.3`.
+- Install workspace deps with `pnpm i` at repo root.
+- Database: spin up Postgres via docker-compose (service: postgres).
+- Run `pnpm prisma:migrate` to create schema; then `pnpm seed`.
+- Start dev with `pnpm dev` (runs api, worker, and dashboard concurrently).
+- If Next.js cache issues occur, delete `.next` and retry `pnpm dev`.
+- If TypeScript path issues occur, ensure `tsconfig.base.json` is referenced by subprojects.
+- During CI (future), use `pnpm -w -r build` and run minimal api tests with `vitest`.

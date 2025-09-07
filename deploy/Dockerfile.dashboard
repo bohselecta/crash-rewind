@@ -1,0 +1,59 @@
+# Multi-stage build for Dashboard
+FROM node:20-alpine AS base
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml ./
+COPY apps/dashboard/package.json ./apps/dashboard/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY packages/shared ./packages/shared
+COPY apps/dashboard ./apps/dashboard
+
+# Build shared package
+RUN pnpm --filter packages/shared build
+
+# Build dashboard
+RUN pnpm --filter apps/dashboard build
+
+# Production stage
+FROM node:20-alpine AS production
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml ./
+COPY apps/dashboard/package.json ./apps/dashboard/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install production dependencies only
+RUN pnpm install --frozen-lockfile --prod
+
+# Copy built application
+COPY --from=base /app/packages/shared/dist ./packages/shared/dist
+COPY --from=base /app/apps/dashboard/.next/standalone ./
+COPY --from=base /app/apps/dashboard/.next/static ./apps/dashboard/.next/static
+COPY --from=base /app/apps/dashboard/public ./apps/dashboard/public
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/api/health || exit 1
+
+# Start dashboard
+CMD ["node", "apps/dashboard/server.js"]

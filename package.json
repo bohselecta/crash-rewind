@@ -1,0 +1,29 @@
+{
+  "name": "crashrewind",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "engines": {
+    "node": ">=20.10 <21"
+  },
+  "overrides": {
+    "typescript": "5.6.3",
+    "tslib": "2.6.3",
+    "tsx": "4.7.0"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "tslib": "2.6.3",
+    "tsx": "4.7.0",
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,runner,web -c blue,magenta,green pnpm:dev:api pnpm:dev:runner pnpm:dev:web",
+    "dev:api": "pnpm --filter services/api dev",
+    "dev:web": "pnpm --filter apps/dashboard dev",
+    "dev:runner": "pnpm --filter workers/replay-runner dev",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "seed": "tsx scripts/seed.ts",
+    "postinstall": "node scripts/enforce-ts-version.mjs"
+  }
+}

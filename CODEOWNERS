@@ -1,0 +1,17 @@
+# Global ownership
+* @bohselecta
+
+# Specific package ownership
+apps/dashboard/ @bohselecta
+services/api/ @bohselecta
+workers/replay-runner/ @bohselecta
+packages/shared/ @bohselecta
+prisma/ @bohselecta
+
+# Documentation
+*.md @bohselecta
+docs/ @bohselecta
+
+# Configuration files
+.github/ @bohselecta
+.cursorrules @bohselecta

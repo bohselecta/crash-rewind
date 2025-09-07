@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("VIEWER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teamMembers TeamMember[]
+}
+
+model App {
+  id       String  @id @default(cuid())
+  slug     String  @unique
+  name     String
+  platform String @default("ANDROID")
+
+  teams    TeamApp[]
+  clusters Cluster[]
+  bundles  CrashBundle[]
+  policies Policy[]
+}
+
+model Team {
+  id      String       @id @default(cuid())
+  name    String
+  members TeamMember[]
+  apps    TeamApp[]
+}
+
+model TeamMember {
+  id     String @id @default(cuid())
+  teamId String
+  userId String
+  role   String @default("MAINTAINER")
+
+  team Team @relation(fields: [teamId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([teamId, userId])
+}
+
+model TeamApp {
+  id     String @id @default(cuid())
+  teamId String
+  appId  String
+
+  team Team @relation(fields: [teamId], references: [id])
+  app  App  @relation(fields: [appId], references: [id])
+
+  @@unique([teamId, appId])
+}
+
+model Cluster {
+  id          String        @id @default(cuid())
+  appId       String
+  signature   String
+  title       String?
+  severity    Int           @default(3)
+  firstSeen   DateTime      @default(now())
+  lastSeen    DateTime      @default(now())
+  ownerUserId String?
+  status      String @default("OPEN")
+  ticketUrl   String?
+
+  app     App          @relation(fields: [appId], references: [id])
+  bundles CrashBundle[]
+  replays ReplayJob[]
+}
+
+model CrashBundle {
+  id              String   @id @default(cuid())
+  appId           String
+  clusterId       String?
+  version         String
+  device          String
+  os              String
+  locale          String
+  flagCohorts     String?
+  context         String
+  uiSteps         String
+  networkCassettes String?
+  createdAt       DateTime @default(now())
+
+  app     App     @relation(fields: [appId], references: [id])
+  cluster Cluster? @relation(fields: [clusterId], references: [id])
+  replays ReplayJob[]
+}
+
+model ReplayJob {
+  id        String       @id @default(cuid())
+  clusterId String
+  bundleId  String?
+  target    String
+  status    String @default("QUEUED")
+  startedAt DateTime?
+  finishedAt DateTime?
+  artifacts String?
+
+  cluster Cluster     @relation(fields: [clusterId], references: [id])
+  bundle  CrashBundle? @relation(fields: [bundleId], references: [id])
+}
+
+model Policy {
+  id         String   @id @default(cuid())
+  appId      String   @unique
+  redact     String
+  sampleRate Float    @default(1)
+  retainDays Int      @default(14)
+  updatedAt  DateTime @updatedAt
+
+  app App @relation(fields: [appId], references: [id])
+}
