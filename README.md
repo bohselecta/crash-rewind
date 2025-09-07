@@ -74,14 +74,33 @@ CrashRewind is built with privacy-first principles:
 
 ## 💰 Pricing
 
-**Enterprise-ready pricing** with unlimited apps, environments, and seats:
+**Depot ELA pricing** - one price for your entire engineering organization:
 
-- **Depot A** (≤ 500k MAU): $120,000/year
-- **Depot B** (≤ 2M MAU): $240,000/year  
-- **Depot C** (≤ 10M MAU): $480,000/year
+### Depot "Crash Core"
+- **Depot A** (≤ 500k MAU): $90,000/year
+- **Depot B** (≤ 2M MAU): $180,000/year  
+- **Depot C** (≤ 10M MAU): $360,000/year
 - **Global+** (> 10M MAU): Custom pricing
 
-See [PRICING.md](PRICING.md) for complete pricing details, ROI calculator, and enterprise features.
+### Session Replay Add-on
+- **Session Replay Lite**: $0.90 per 1,000 sessions (privacy-first, 1-5% sampled)
+
+**13× ROI** with deterministic crash replay. See [PRICING.md](PRICING.md) for complete details.
+
+## 🆚 Why Not Just Crashlytics/Sentry?
+
+| Feature | Crashlytics/Sentry | CrashRewind |
+|---------|-------------------|-------------|
+| **Crash Reports** | Stack traces + context | ✅ Stack traces + context |
+| **Session Replay** | Web only, limited mobile | ✅ Mobile session replay (privacy-first) |
+| **Deterministic Replay** | ❌ Manual reproduction | ✅ One-click deterministic replay |
+| **Minimal Repro** | ❌ Manual steps | ✅ Auto-generated 3-step recipes |
+| **ANR/OOM Focus** | Basic support | ✅ First-class ANR timelines & OOM heuristics |
+| **CI Integration** | ❌ No replay verification | ✅ CI verify-replay gate blocks bad releases |
+| **Ownership & SLA** | ❌ Manual assignment | ✅ Auto-assign + SLA timers |
+| **Crashlytics Bridge** | ❌ Lock-in | ✅ Ingest free Crashlytics events |
+
+**Bottom line**: Crashlytics/Sentry tell you *what* crashed. CrashRewind shows you *exactly how to reproduce it* and *who should fix it*.
 
 ## 📊 What's Next
 

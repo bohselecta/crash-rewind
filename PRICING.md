@@ -4,14 +4,22 @@
 
 **One price for your entire engineering organization** - unlimited apps, environments, and seats.
 
-### Pricing Tiers
+### Depot "Crash Core" (Crash + Clustering + Deterministic Replay)
 
 | Band | Mobile MAU | Annual Price | Crash Bundles/Year | Replay Minutes/Year | Runner Concurrency | Support/SLA |
 |------|------------|--------------|-------------------|-------------------|-------------------|-------------|
-| **Depot A** | ≤ 500k | $120,000 | 600,000 | 60,000 | 8 | 8×5, P1 in 4h, 99.9% |
-| **Depot B** | ≤ 2M | $240,000 | 3,000,000 | 240,000 | 16 | 24×7, P1 in 1h, 99.95% |
-| **Depot C** | ≤ 10M | $480,000 | 12,000,000 | 1,200,000 | 32 | 24×7, P1 in 30m, TAM, 99.95% |
-| **Global+** | > 10M | Custom (starts ~$750k) | Unlimited (fair use) | Unlimited (fair use) | Dedicated fleet | 24×7, P1 in 15m, TAM, SLOs |
+| **Depot A** | ≤ 500k | $90,000 | 600,000 | 60,000 | 8 | 8×5, P1 in 4h, 99.9% |
+| **Depot B** | ≤ 2M | $180,000 | 3,000,000 | 240,000 | 16 | 24×7, P1 in 1h, 99.95% |
+| **Depot C** | ≤ 10M | $360,000 | 12,000,000 | 1,200,000 | 32 | 24×7, P1 in 30m, TAM, 99.95% |
+| **Global+** | > 10M | Custom (starts ~$600k) | Unlimited (fair use) | Unlimited (fair use) | Dedicated fleet | 24×7, P1 in 15m, TAM, SLOs |
+
+### Depot "Crash + Session" Add-on
+
+**Session Replay Lite**: Privacy-first, low-overhead mobile session replay with strict redaction and 1-5% default sampling.
+
+- **Price**: $0.90 per 1,000 sessions (org-pooled)
+- **Features**: Text redaction by default, configurable sampling, customer-managed keys
+- **Compliance**: GDPR/CCPA ready, on-device PII filtering
 
 ### What's Included
 
@@ -29,6 +37,7 @@
 - **Crash bundles**: $0.007 per bundle
 - **Replay minutes**: $0.05 per minute
 - **Extra runner packs**: $2,000/month (4 concurrent runners)
+- **Burst weekend pass**: $1,000/3 days for release weeks
 
 ### Commercial Add-ons
 
@@ -43,8 +52,9 @@
 ### Discounts (Stackable)
 
 - **Multi-year prepay**: -10% (2-year), -18% (3-year)
-- **Design partner**: -35% year 1 (first 3 customers)
+- **Design partner**: -35% year 1 (first 3 customers) + success metric clause
 - **Public reference**: -5%
+- **Success metric upgrade**: If >60% deterministic-repro rate achieved, upgrade triggers
 
 ## ROI Calculator
 
@@ -54,14 +64,18 @@ If deterministic replays save **2 engineer hours per incident** and you run **10
 - **Time saved**: 20,000 engineer hours
 - **Loaded rate**: $120/hour
 - **Value**: $2,400,000 reclaimed engineering time
-- **Depot B cost**: $240,000/year
-- **ROI**: **10× return** before MTTR/CSAT benefits
+- **Depot B cost**: $180,000/year
+- **ROI**: **13× return** before MTTR/CSAT benefits
 
 ### Additional Benefits
 - **Faster MTTR**: 60-80% reduction in mean time to resolution
 - **Reduced duplicates**: 70% fewer duplicate crash reports
 - **Better triage**: Automatic ownership assignment and routing
 - **Privacy compliance**: Zero PII exposure with on-device redaction
+- **ANR/OOM focus**: First-class ANR timelines and OOM heuristics
+- **CI verify-replay gate**: Blocks releases on replay failures
+- **Symbol pipelines**: dSYM/ProGuard auto-upload + source context
+- **Crashlytics bridge**: Ingest free Crashlytics events for deterministic replays
 
 ## Enterprise Features
 

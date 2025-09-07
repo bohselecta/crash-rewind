@@ -27,28 +27,33 @@
 ### 3. Pricing Tiers
 
 #### 3.1 Depot A (≤ 500k MAU)
-- **Annual Price**: $120,000
+- **Annual Price**: $90,000
 - **Included Usage**: 600,000 crash bundles, 60,000 replay minutes
 - **Runner Concurrency**: 8 concurrent
 - **Support**: 8×5, P1 in 4 hours, 99.9% uptime
 
 #### 3.2 Depot B (≤ 2M MAU)
-- **Annual Price**: $240,000
+- **Annual Price**: $180,000
 - **Included Usage**: 3,000,000 crash bundles, 240,000 replay minutes
 - **Runner Concurrency**: 16 concurrent
 - **Support**: 24×7, P1 in 1 hour, 99.95% uptime
 
 #### 3.3 Depot C (≤ 10M MAU)
-- **Annual Price**: $480,000
+- **Annual Price**: $360,000
 - **Included Usage**: 12,000,000 crash bundles, 1,200,000 replay minutes
 - **Runner Concurrency**: 32 concurrent
 - **Support**: 24×7, P1 in 30 minutes, TAM, 99.95% uptime
 
 #### 3.4 Global+ (> 10M MAU)
-- **Annual Price**: Custom (starts ~$750,000)
+- **Annual Price**: Custom (starts ~$600,000)
 - **Included Usage**: Unlimited (fair use)
 - **Runner Concurrency**: Dedicated fleet
 - **Support**: 24×7, P1 in 15 minutes, TAM, SLOs
+
+#### 3.5 Session Replay Add-on
+- **Price**: $0.90 per 1,000 sessions (org-pooled)
+- **Features**: Privacy-first mobile session replay with strict redaction and 1-5% default sampling
+- **Compliance**: GDPR/CCPA ready, on-device PII filtering
 
 ### 4. Usage and Overages
 
@@ -59,6 +64,7 @@ All crash bundles and replay minutes are pooled across Customer's entire organiz
 - **Crash Bundles**: $0.007 per bundle
 - **Replay Minutes**: $0.05 per minute
 - **Extra Runner Packs**: $2,000/month (4 concurrent runners)
+- **Burst Weekend Pass**: $1,000/3 days for release weeks
 
 #### 4.3 Usage Monitoring
 Customer will receive monthly usage reports. Overages will be billed quarterly in arrears.

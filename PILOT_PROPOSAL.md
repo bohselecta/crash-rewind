@@ -97,10 +97,15 @@ CrashRewind transforms mobile crash triage from a manual, time-consuming process
 - **Training**: Included (2 hours onboarding)
 
 ### Post-Pilot Pricing (Depot ELA)
-- **Depot A** (≤ 500k MAU): $120,000/year
-- **Depot B** (≤ 2M MAU): $240,000/year  
-- **Depot C** (≤ 10M MAU): $480,000/year
+
+#### Depot "Crash Core"
+- **Depot A** (≤ 500k MAU): $90,000/year
+- **Depot B** (≤ 2M MAU): $180,000/year  
+- **Depot C** (≤ 10M MAU): $360,000/year
 - **Global+** (> 10M MAU): Custom pricing
+
+#### Session Replay Add-on
+- **Session Replay Lite**: $0.90 per 1,000 sessions (privacy-first, 1-5% sampled)
 
 *Includes unlimited apps, environments, and seats. See [PRICING.md](PRICING.md) for complete details.*
 

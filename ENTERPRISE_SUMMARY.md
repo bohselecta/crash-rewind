@@ -24,16 +24,20 @@
 
 ## Depot ELA Pricing
 
+### Depot "Crash Core"
 | Band | Mobile MAU | Annual Price | Included Usage | Support |
 |------|------------|--------------|----------------|---------|
-| **Depot A** | ≤ 500k | $120,000 | 600k bundles, 60k minutes | 8×5, P1 in 4h |
-| **Depot B** | ≤ 2M | $240,000 | 3M bundles, 240k minutes | 24×7, P1 in 1h |
-| **Depot C** | ≤ 10M | $480,000 | 12M bundles, 1.2M minutes | 24×7, P1 in 30m |
+| **Depot A** | ≤ 500k | $90,000 | 600k bundles, 60k minutes | 8×5, P1 in 4h |
+| **Depot B** | ≤ 2M | $180,000 | 3M bundles, 240k minutes | 24×7, P1 in 1h |
+| **Depot C** | ≤ 10M | $360,000 | 12M bundles, 1.2M minutes | 24×7, P1 in 30m |
 | **Global+** | > 10M | Custom | Unlimited (fair use) | 24×7, P1 in 15m |
+
+### Session Replay Add-on
+- **Session Replay Lite**: $0.90 per 1,000 sessions (privacy-first, 1-5% sampled)
 
 **What's Included**: Unlimited apps, environments, seats • Pooled usage • Cloud or VPC • Customer data ownership
 
-**Overages**: $0.007/bundle, $0.05/minute • Extra runners: $2,000/month (4 concurrent)
+**Overages**: $0.007/bundle, $0.05/minute • Extra runners: $2,000/month (4 concurrent) • Burst weekend: $1,000/3 days
 
 ---
 
@@ -41,7 +45,7 @@
 
 **Example**: 10,000 replays/year × 2 hours saved × $120/hour = **$2.4M value**
 
-**Depot B cost**: $240,000/year = **10× ROI** before MTTR/CSAT benefits
+**Depot B cost**: $180,000/year = **13× ROI** before MTTR/CSAT benefits
 
 ---
 
@@ -50,6 +54,9 @@
 ✅ **Time-Travel Debugging**: RNG/time/network frozen for perfect reproduction  
 ✅ **Behavioral Clustering**: Groups by user journey, not code signatures  
 ✅ **Privacy by Design**: Default-deny with customer-managed keys  
+✅ **ANR/OOM Focus**: First-class ANR timelines and OOM heuristics  
+✅ **CI Integration**: Verify-replay gate blocks bad releases  
+✅ **Crashlytics Bridge**: Ingest free events for deterministic replays  
 ✅ **Enterprise Ready**: SOC2, audit trails, role-based access  
 
 ---

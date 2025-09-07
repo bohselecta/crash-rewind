@@ -10,12 +10,18 @@
 ## Order Details
 
 ### SKU: CrashRewind Depot ELA – [Band Selection]
-- **Depot A** (≤ 500k MAU): $120,000/year
-- **Depot B** (≤ 2M MAU): $240,000/year  
-- **Depot C** (≤ 10M MAU): $480,000/year
+
+#### Depot "Crash Core"
+- **Depot A** (≤ 500k MAU): $90,000/year
+- **Depot B** (≤ 2M MAU): $180,000/year  
+- **Depot C** (≤ 10M MAU): $360,000/year
 - **Global+** (> 10M MAU): Custom pricing
 
 **Selected Band**: [ ] Depot A [ ] Depot B [ ] Depot C [ ] Global+
+
+#### Session Replay Add-on (Optional)
+- **Session Replay Lite**: $0.90 per 1,000 sessions (privacy-first, 1-5% sampled)
+- **Selected**: [ ] Yes [ ] No
 
 ### Term
 - **Initial Term**: 12 months
@@ -53,6 +59,7 @@
 - **Crash Bundles**: $0.007 per bundle
 - **Replay Minutes**: $0.05 per minute
 - **Extra Runner Packs**: $2,000/month (4 concurrent)
+- **Burst Weekend Pass**: $1,000/3 days for release weeks
 
 ### Add-ons (Optional)
 - [ ] VPC/On-prem deployment (+$140,000/year)
